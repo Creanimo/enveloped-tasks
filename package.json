@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "five-server": "^0.0.14"
+  }
+}
