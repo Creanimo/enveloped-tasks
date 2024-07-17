@@ -1,6 +1,8 @@
 tasks:
   - name: Start Five Server
-    command: npx five-server --port 3000
+    command: npx five-server --port=3000
+  - name: Install Sass
+    command: npm install sass --global
 
 ports:
   - port: 3000
