@@ -7,8 +7,8 @@ class UiInput extends UiComponent {
      * @param {string} label 
      * @param {string} value 
      */
-    constructor(id, label, value) {
-        super(id, label)
+    constructor(id, label, value, name = "ui-input",) {
+        super(id, label, name)
         this.value = value;
     }
 
@@ -17,6 +17,10 @@ class UiInput extends UiComponent {
             ...super.getRenderProperties(),
             value: this.value,
         };
+    }
+
+    setEventListeners() {
+        console.log(`UI Component ${this.id} didn't set any event listeners.`)
     }
 }
 

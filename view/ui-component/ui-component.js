@@ -1,4 +1,5 @@
 import Mustache from "../../node_modules/mustache/mustache.mjs";
+import { htmlStringToElement } from "../tools/htmlStringToElement.js";
 
 /**
  * Base class for UI components.
@@ -9,10 +10,10 @@ class UiComponent {
      * @param {string} id - The unique identifier for the component.
      * @param {string} label - The label for the component.
      */
-    constructor(id, label) {
+    constructor(id, label, name = "ui-component") {
         this.id = id;
         this.label = label;
-        this.templatePath = '';
+        this.name = name
     }
 
     /**
@@ -23,6 +24,7 @@ class UiComponent {
         return {
             id: this.id,
             label: this.label,
+            name: this.name,
         };
     }
 
@@ -36,15 +38,19 @@ class UiComponent {
 
     /**
      * Renders the component using the specified template.
-     * @returns {Promise<string>} The rendered HTML string.
+     * @returns {Promise<Node>} The rendered HTML string.
      */
     async render() {
+        const parser = new DOMParser();
         try {
             const template = await this.#loadTemplate(this.templatePath);
-            return Mustache.render(template, this.getRenderProperties());
+            const renderProps = await this.getRenderProperties();
+            const htmlStr = Mustache.render(template, renderProps);
+            const renderedHTML = htmlStringToElement(htmlStr);
+            return renderedHTML
         } catch (error) {
             console.error(`Error rendering component ${this.id}:`, error);
-            return `<div>Error loading component</div>`;
+            return htmlStringToElement(`<div>Error loading component</div>`);
         }
     }
 

@@ -8,8 +8,9 @@ class UiTextField extends UiInput {
      * @param {string} value 
      * @param {string} templatePath - The path to the template file.
      */
-    constructor(id, label, value, templatePath = "/view/ui-component/input/textfield/ui-textfield.html") {
-        super(id, label, value);
+    constructor(id, label, name = "ui-textfield", value) {
+        super(id, label, name, value);
+        const templatePath = "/view/ui-component/input/textfield/ui-textfield.html"
         this.setTemplatePath(templatePath); // Set the template path
     }
 }
