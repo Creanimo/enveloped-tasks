@@ -1,9 +1,14 @@
+image: gitpod/workspace-full
+
 tasks:
-  - name: Start Five Server
+  - name: run server
     command: npx five-server --port=3000
-  - name: Install Sass
-    command: npm install sass --global
+
+  - name: install sass
+    init: npm install sass --global
 
 ports:
-  - port: 3000
+  - name: Frontend
+    description: Port 3000 for the frontend
+    port: 3000
     onOpen: open-preview
