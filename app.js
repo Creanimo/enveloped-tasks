@@ -4,10 +4,8 @@ import { UiEditableTextLine } from "./view/ui-component/input/editableTextLine/u
 const textField = new UiTextField('text1', 'Enter Text', '');
 const editableText = new UiEditableTextLine('sdf', "Click here to edit", "Editable Text", textField);
 
-editableText.render()
-.then(renderedHtml => {
-    document.body.appendChild(renderedHtml);})
-.then(() => {
-    editableText.setEventListeners(); // Call setEventListeners after appending to the DOM
-})
+document.addEventListener("DOMContentLoaded", () => {
+    const targetNode = document.body
+    editableText.render(targetNode);
+});
 

@@ -19,14 +19,14 @@ class UiEditableTextLine extends UiInput {
     }
 
     async getRenderProperties() {
-        const nestedComponent = await this.inputWhenEditing.render();
+        const nestedComponentRender = await this.inputWhenEditing.renderHTML();
         return {
             ...super.getRenderProperties(),
-            nestedComponentRender: nestedComponent.outerHTML,
+            nestedComponentRender: nestedComponentRender.outerHTML,
         };
     }
 
-    setEventListeners() {
+    async setEventListeners() {
         const viewVisibility = new ClassToggler(`${this.name}-${this.id}`, `ui-editableTextLine__viewer`, 'hidden');
         const editorVisibility = new ClassToggler(`${this.name}-${this.id}`, `ui-editableTextLine__editor`, 'hidden');
 
@@ -43,7 +43,7 @@ class UiEditableTextLine extends UiInput {
             console.error(`No edit button found with ID "${this.name}-${this.id}_editableTextButton"`);
         }
 
-        this.inputWhenEditing.setEventListeners();
+        // await this.inputWhenEditing.setEventListeners();
     }
 }
 

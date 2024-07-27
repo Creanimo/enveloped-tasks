@@ -40,18 +40,19 @@ class UiComponent {
      * Renders the component using the specified template.
      * @returns {Promise<Node>} The rendered HTML string.
      */
-    async render() {
-        const parser = new DOMParser();
-        try {
-            const template = await this.#loadTemplate(this.templatePath);
-            const renderProps = await this.getRenderProperties();
-            const htmlStr = Mustache.render(template, renderProps);
-            const renderedHTML = htmlStringToElement(htmlStr);
-            return renderedHTML
-        } catch (error) {
-            console.error(`Error rendering component ${this.id}:`, error);
-            return htmlStringToElement(`<div>Error loading component</div>`);
-        }
+    async render(targetNode) {
+        const renderedHtml = await this.renderHTML();
+        targetNode.appendChild(renderedHtml);
+    }
+
+    async renderHTML() {
+        console.log(this.getRenderProperties())
+        const template = await this.#loadTemplate(this.templatePath);
+        const renderProps = await this.getRenderProperties();
+        const htmlStr = await Mustache.render(template, renderProps);
+        const renderedHTML = htmlStringToElement(htmlStr);
+
+        return renderedHTML;
     }
 
     /**

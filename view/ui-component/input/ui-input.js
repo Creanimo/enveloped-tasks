@@ -19,7 +19,12 @@ class UiInput extends UiComponent {
         };
     }
 
-    setEventListeners() {
+    async render(targetNode) {
+        await super.render(targetNode);
+        await this.setEventListeners();
+    }
+
+    async setEventListeners() {
         console.log(`UI Component ${this.id} didn't set any event listeners.`)
     }
 }

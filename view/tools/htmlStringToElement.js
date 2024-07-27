@@ -3,9 +3,12 @@
  * @param {string} htmlString 
  * @returns {Node}
  */
-function htmlStringToElement(htmlString) {
-    const parser = new DOMParser();
-    const element = parser.parseFromString(htmlString, "text/html").body.firstElementChild;
+async function htmlStringToElement(htmlString) {
+    console.log("HTML String to convert:", htmlString); // Debugging line
+    const template = document.createElement('template');
+    template.innerHTML = htmlString.trim();
+    const element = template.content.firstChild;
+    console.log("Converted Element:", element); // Debugging line
     return element;
 }
 
