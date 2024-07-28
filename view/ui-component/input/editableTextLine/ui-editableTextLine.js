@@ -31,10 +31,12 @@ class UiEditableTextLine extends UiInput {
         const editorVisibility = new ClassToggler(`${this.name}-${this.id}`, `ui-editableTextLine__editor`, 'hidden');
 
         const editButton = document.getElementById(`${this.name}-${this.id}_editableTextButton`);
+        const editableElement = document.getElementById(`${this.inputWhenEditing.id}`);
         if (editButton) {
             const enterEdit = () => {
                 viewVisibility.toggleClassMethod();
                 editorVisibility.toggleClassMethod();
+                editableElement.focus();
                 console.log("Enter Edit was clicked");
             };
             editButton.addEventListener("click", enterEdit);
@@ -43,7 +45,19 @@ class UiEditableTextLine extends UiInput {
             console.error(`No edit button found with ID "${this.name}-${this.id}_editableTextButton"`);
         }
 
-        // await this.inputWhenEditing.setEventListeners();
+        if (editableElement) {
+            const exitEdit = () => {
+                viewVisibility.toggleClassMethod();
+                editorVisibility.toggleClassMethod();
+                console.log("Element lost focus");
+            };
+            editableElement.addEventListener("blur", exitEdit);
+            console.log("Blur Event Listener is in place");
+        } else {
+            console.error(`No editable element found with ID "${this.name}-${this.id}_editableText"`);
+        }
+
+        await this.inputWhenEditing.setEventListeners();
     }
 }
 
