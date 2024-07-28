@@ -47,6 +47,10 @@ class UiEditableTextLine extends UiInput {
 
         if (editableElement) {
             const exitEdit = () => {
+                if (editableElement != "") {
+                    this.value = editableElement.value
+                    editButton.innerText = editableElement.value;
+                }
                 viewVisibility.toggleClassMethod();
                 editorVisibility.toggleClassMethod();
                 console.log("Element lost focus");
