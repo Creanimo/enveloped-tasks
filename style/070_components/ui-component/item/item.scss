@@ -1,0 +1,13 @@
+@use "../../../010_settings/borders.scss" as s-brd;
+@use "../../../010_settings/shadows.scss" as s-shdw;
+@use "../../../050_layout/variables" as l-vars;
+
+.ui-item {
+    padding: l-vars.$spacing-md;
+    border: s-brd.$border-slight;
+    border-radius: s-brd.$border-radius-sm;
+    box-shadow: s-shdw.$shadow-md;
+    &:not(:first-child) {
+        margin-top: l-vars.$spacing-sm;
+    }
+}

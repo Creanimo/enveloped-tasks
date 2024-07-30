@@ -1,3 +1,13 @@
+.ui-item {
+  padding: 16px;
+  border: 1px solid #bebebe;
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.ui-item:not(:first-child) {
+  margin-top: 8px;
+}
+
 .hidden {
   display: none;
 }

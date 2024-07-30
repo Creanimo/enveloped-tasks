@@ -1,0 +1,5 @@
+@use "./colors.scss" as s-col;
+
+$border-slight: 1px solid s-col.$shade-slight-02;
+$border-radius-sm: 5px;
+$border-radius-lg: 15px;
