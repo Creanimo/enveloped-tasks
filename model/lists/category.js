@@ -4,7 +4,7 @@ import { List } from "./list.js";
 class Category extends List {
     /**
      * 
-     * @param {Array<Task|null>} tasks 
+     * @param {Array<object>} tasks 
      * @param {string} name 
      */
     constructor(tasks = [], name) {

@@ -6,8 +6,11 @@ function mapDataToTask(data, taskModel = Task) {
     return new taskModel(id, title, description, completed, pinned, category, tags, dueDate);
 }
 
-function mapDataToCategory(data, CategoryModel = Category) {
+function mapDataToCategory(data, CategoryModel = Category, TaskModel = Task) {
     const { tasks, name } = data;
+    for (const taskId of tasks) {
+        
+    }
     const taskInstances = tasks.map(taskData => mapDataToTask(taskData));
     return new CategoryModel(taskInstances, name);
 }
