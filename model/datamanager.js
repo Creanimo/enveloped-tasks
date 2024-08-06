@@ -6,7 +6,7 @@ const mockData = {
             "description": "Description for Task 1",
             "completed": false,
             "pinned": false,
-            "category": "Work",
+            "category": "1",
             "tags": ["urgent"],
             "dueDate": "2024-08-10T00:00:00Z"
         },
@@ -16,7 +16,17 @@ const mockData = {
             "description": "Description for Task 2",
             "completed": false,
             "pinned": true,
-            "category": "Personal",
+            "category": "2",
+            "tags": ["important"],
+            "dueDate": "2024-08-15T00:00:00Z"
+        },
+        "3": {
+            "id": "3",
+            "title": "Task 3",
+            "description": "Description for Task 2",
+            "completed": false,
+            "pinned": true,
+            "category": "2",
             "tags": ["important"],
             "dueDate": "2024-08-15T00:00:00Z"
         }
@@ -28,7 +38,7 @@ const mockData = {
         },
         "2": {
             "name": "Personal",
-            "taskIds": ["2"]
+            "taskIds": ["2","3"]
         }
     }
 };

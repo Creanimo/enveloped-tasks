@@ -12,12 +12,9 @@ class UiSortableList extends UiInput {
      * @param {Array<UiItem>} items 
      * @param {string} name 
      */
-    constructor(id, label, items, name = "ui-component") {
-        this.id = id;
-        this.label = label;
-        this.items = items;
-        this.name = name;
-        const templatePath = "/view/ui-component/input/textfield/ui-sortablelist.html"
+    constructor(id, label, items, name = "ui-sortableList") {
+        super(id, label, items, name);
+        const templatePath = "/view/ui-component/input/sortableList/ui-sortablelist.html"
         this.setTemplatePath(templatePath);
     }
 
@@ -28,20 +25,22 @@ class UiSortableList extends UiInput {
     async getRenderProperties() {
         let renderedItems = [];
         for (const item of this.items) {
-            currentRender = await item.renderHTML();
+            let currentRender = await item.renderHTML();
+            currentRender = currentRender.outerHTML;
             renderedItems.push(currentRender);
         }
         return {
-            ...super().getRenderProperties,
+            ...super.getRenderProperties(),
             items: renderedItems,
         };
     }
 
     async setEventListeners() {
+        /* items currently don't have event listeners
         for (const item of this.items) {
             await item.setEventListeners();
-        }
+        } */
     }
 }
 
-export { UiComponent };
+export { UiSortableList };

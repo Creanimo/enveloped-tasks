@@ -2,13 +2,30 @@ import { UiTextField } from "./view/ui-component/input/textfield/ui-textfield.js
 import { UiEditableTextLine } from "./view/ui-component/input/editableTextLine/ui-editableTextLine.js";
 import { UiItem } from "./view/ui-component/item/item.js";
 import { CategoryController } from "./controller/category-controller.js";
+import { UiSortableList } from "./view/ui-component/input/sortableList/ui-sortablelist.js";
 
-const categoryController = new CategoryController
-const fetchedCategory = await categoryController.getCategoryById("1");
-console.log("Category fetched:" + JSON.stringify(fetchedCategory))
+// defining all Controllers to fetch Data
+const categoryController = new CategoryController;
+
+// all UI components in this view
+const brainDumpCategoryList = new UiSortableList("braindDump","Brain Dump", [])
+
+// filling UI components with data
+const buildBraindDumpList = async () => {
+    const brainDumpList = await categoryController.fillUiComponent("2", brainDumpCategoryList);
+    return brainDumpList;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // placing UI components
+    const targetNode = document.body;
+    buildBraindDumpList().then(brainDumpList => {
+        brainDumpList.render(targetNode);
+    })
+});
 
 
-
+/*
 const textField = new UiTextField('text1', 'Enter Text', '');
 const editableText = new UiEditableTextLine('sdf', "Click here to edit", "Editable Text", textField);
 
@@ -44,3 +61,4 @@ document.addEventListener("DOMContentLoaded", () => {
         
 });
 
+*/
