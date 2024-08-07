@@ -1,3 +1,5 @@
+import { TaskController } from "../controller/task-controller.js";
+
 const mockData = {
     "tasks": {
         "1": {
@@ -45,11 +47,27 @@ const mockData = {
 
 class DataManager {
     static async fetchTaskById(id) {
-        return mockData.tasks[id];
+        const data = await mockData.tasks[id]
+        return data;
     }
     static async fetchCategoryById(id) {
-        return mockData.categories[id];
+        const data = await mockData.categories[id];
+        return data;
+    }
+    static async fetchTasksInCategory(categoryId) {
+        const categoryData = await this.fetchCategoryById(categoryId);
+        let tasks = [];
+        const extractIds = Object.values(categoryData["taskIds"]);
+        
+        for (const taskId of extractIds) {
+            const taskController = new TaskController();
+            const taskData = await taskController.getTaskById(taskId);
+            tasks.push(taskData);
+        }
+        
+        return tasks;
     }
 }
+
 
 export { DataManager };

@@ -5,24 +5,6 @@ import { UiItem } from "../view/ui-component/item/item.js";
 import { TaskController } from "./task-controller.js";
 
 class CategoryController {
-    async getCategoryById(categoryId) {
-        const categoryData = await DataManager.fetchCategoryById(categoryId);
-        return categoryData;
-    }
-
-    async getTasksInCategory(categoryId) {
-        const categoryData = await this.getCategoryById(categoryId);
-        let tasks = [];
-        const extractIds = Object.values(categoryData["taskIds"]);
-        
-        for (const taskId of extractIds) {
-            const taskController = new TaskController();
-            const taskData = await taskController.getTaskById(taskId);
-            tasks.push(taskData);
-        }
-        
-        return tasks;
-    }
     
 
     /**
@@ -32,7 +14,7 @@ class CategoryController {
      * @returns {UiSortableList}
      */
     async fillUiComponent(categoryId, uiComponent) {
-        const tasks = await this.getTasksInCategory(categoryId);
+        const tasks = await DataManager.fetchTasksInCategory(categoryId);
         
         switch (uiComponent.constructor.name) {
             case "UiSortableList":
