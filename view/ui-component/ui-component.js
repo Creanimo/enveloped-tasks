@@ -47,16 +47,9 @@ class UiComponent {
 
     async renderHTML() {
         const template = await this.#loadTemplate(this.templatePath);
-        //console.log("Template:", template);
-        
         const renderProps = await this.getRenderProperties();
-        //console.log("Render Props:", renderProps);
-        
-        const htmlStr = await Mustache.render(template, renderProps);
-        //console.log("HTML String:", htmlStr);
-        
+        const htmlStr = await Mustache.render(template, renderProps); 
         const renderedHTML = htmlStringToElement(htmlStr);
-        //console.log("Rendered HTML Element:", renderedHTML);
         
         return renderedHTML;
     }

@@ -9,6 +9,7 @@ const categoryController = new CategoryController;
 
 // all UI components in this view
 const brainDumpCategoryList = new UiSortableList("braindDump","Brain Dump", [])
+const TextFieldToTestThings = new UiTextField("asd", "My super cool textfield", "");
 
 // filling UI components with data
 const buildBraindDumpList = async () => {
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buildBraindDumpList().then(brainDumpList => {
         brainDumpList.render(targetNode);
     })
+    TextFieldToTestThings.render(targetNode);
 });
 
 

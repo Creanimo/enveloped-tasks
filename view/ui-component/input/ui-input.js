@@ -2,14 +2,19 @@ import { UiComponent } from "../ui-component.js";
 
 class UiInput extends UiComponent {
     /**
-     * Prototype for all UI Components of type UI Input.
-     * @param {string} id 
-     * @param {string} label 
-     * @param {string} value 
+     * 
+     * @param {*} id 
+     * @param {*} label 
+     * @param {*} value 
+     * @param {*} name 
+     * @param {Function} callOnBlur 
      */
-    constructor(id, label, value, name = "ui-input",) {
+    constructor(id, label, value, name = "ui-input", callOnBlur = (() => { return undefined; }), callFormCollect = (() => { return undefined; })) {
         super(id, label, name)
         this.value = value;
+        this.callOnBlur = callOnBlur;
+        this.callFormCollect = callFormCollect;
+        this.eventValueUpdate = new Event(`${id}_value-update`);
     }
 
     getRenderProperties() {
@@ -25,7 +30,16 @@ class UiInput extends UiComponent {
     }
 
     async setEventListeners() {
-        console.log(`UI Component ${this.id} didn't set any event listeners.`)
+        const inputElement = document.getElementById(this.id);
+
+        const onBlur = () => {
+            this.value = inputElement.value;
+            this.callOnBlur();
+            this.callFormCollect();
+            console.log("Text UI Component now has value:" + this.value);
+        }
+
+        inputElement.addEventListener("blur", onBlur)
     }
 }
 
