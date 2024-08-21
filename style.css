@@ -8,6 +8,18 @@
   margin-top: 8px;
 }
 
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.c-loading-spinner {
+  animation: rotating 0.8s steps(8, end) infinite;
+}
+
 .hidden {
   display: none;
 }
