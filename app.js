@@ -3,13 +3,15 @@ import { UiEditableTextLine } from "./view/ui-component/input/editableTextLine/u
 import { UiItem } from "./view/ui-component/item/item.js";
 import { CategoryController } from "./controller/category-controller.js";
 import { UiSortableList } from "./view/ui-component/input/sortableList/ui-sortablelist.js";
+import { UiTaskInputTagify } from "./view/enveloped-tasks/task-input-tagify/ui-task-input-tagify.js";
 
 // defining all Controllers to fetch Data
 const categoryController = new CategoryController;
 
 // all UI components in this view
 const brainDumpCategoryList = new UiSortableList("braindDump","Brain Dump", [])
-const TextFieldToTestThings = new UiTextField("asd", "My super cool textfield", "");
+// const TextFieldToTestThings = new UiTextField("asd", "My super cool textfield", "");
+const taskInputField = new UiTaskInputTagify("dsxjzhgbf", "Add your task:", "", "addTask", () => {}, () => {}, () => { return ["work", "private"]}, () => { return ["urgent", "difficult", "easy"]});
 
 // filling UI components with data
 const buildBraindDumpList = async () => {
@@ -23,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     buildBraindDumpList().then(brainDumpList => {
         brainDumpList.render(targetNode);
     })
-    TextFieldToTestThings.render(targetNode);
+    taskInputField.render(targetNode);
+    // TextFieldToTestThings.render(targetNode);
 });
 
 

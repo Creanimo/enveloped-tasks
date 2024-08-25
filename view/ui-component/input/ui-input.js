@@ -26,7 +26,7 @@ class UiInput extends UiComponent {
 
     async render(targetNode) {
         await super.render(targetNode);
-        await this.setEventListeners();
+        // await this.setEventListeners();
     }
 
     async setEventListeners() {
@@ -38,7 +38,6 @@ class UiInput extends UiComponent {
             this.callFormCollect();
             console.log("Text UI Component now has value:" + this.value);
         }
-
         inputElement.addEventListener("blur", onBlur)
     }
 }

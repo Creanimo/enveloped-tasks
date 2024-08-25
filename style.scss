@@ -1,4 +1,5 @@
 @use "./style/070_components/" as *;
+@use "./node_modules/@yaireo/tagify/src/tagify" as tagify;
 
 .hidden {
     display: none;
