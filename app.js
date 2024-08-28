@@ -4,6 +4,7 @@ import { UiItem } from "./view/ui-component/item/item.js";
 import { CategoryController } from "./controller/category-controller.js";
 import { UiSortableList } from "./view/ui-component/input/sortableList/ui-sortablelist.js";
 import { UiTaskInputTagify } from "./view/enveloped-tasks/task-input-tagify/ui-task-input-tagify.js";
+import { DataManager } from "./model/datamanager.js";
 
 // defining all Controllers to fetch Data
 const categoryController = new CategoryController;
@@ -11,7 +12,12 @@ const categoryController = new CategoryController;
 // all UI components in this view
 const brainDumpCategoryList = new UiSortableList("braindDump","Brain Dump", [])
 // const TextFieldToTestThings = new UiTextField("asd", "My super cool textfield", "");
-const taskInputField = new UiTaskInputTagify("dsxjzhgbf", "Add your task:", "", "addTask", () => {}, () => {}, () => { return ["work", "private"]}, () => { return ["urgent", "difficult", "easy"]});
+
+const fetchCategoryNamesFromAppData = async () => {
+    const categoryNames = await DataManager.fetchCategoryNames()
+    return categoryNames
+}
+const taskInputField = new UiTaskInputTagify("dsxjzhgbf", "Add your task:", "", "addTask", () => {}, () => {}, fetchCategoryNamesFromAppData, () => { return ["urgent", "difficult", "easy"]});
 
 // filling UI components with data
 const buildBraindDumpList = async () => {
@@ -27,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     taskInputField.render(targetNode);
     // TextFieldToTestThings.render(targetNode);
+
 });
 
 

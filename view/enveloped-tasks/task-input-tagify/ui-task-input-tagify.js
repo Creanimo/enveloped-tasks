@@ -6,14 +6,16 @@ class UiTaskInputTagify extends UiInput {
         super(id, label, value, name, callOnBlur, callFormCollect);
         const templatePath = "view/enveloped-tasks/task-input-tagify/ui-task-input-tagify.html";
         this.setTemplatePath(templatePath);
-        this.whitelistCategories = ["work", "personal"]
-        this.whitelistTags = ["urgent", "gardening"];
+        fetchCategories().then(data => this.whitelistCategories = data)
+        this.whitelistTags = fetchTags();
         this.tagify = {};
     }
 
     async render(targetNode) {
         await super.render(targetNode);
         const input = document.getElementById(this.id);
+        console.log("TYPE OF whitelist: " + typeof(this.whitelistCategories))
+        console.log("CONTENT whitelist: " + JSON.stringify(this.whitelistCategories));
         console.log('Input element:', input);  // Debugging statement
         let tagify = new Tagify(input, {
             mode: 'mix',

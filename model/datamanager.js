@@ -1,6 +1,6 @@
 import { TaskController } from "../controller/task-controller.js";
 
-const mockData = {
+const appData = {
     "tasks": {
         "1": {
             "id": "1",
@@ -39,21 +39,28 @@ const mockData = {
             "taskIds": ["1"]
         },
         "2": {
-            "name": "Personal",
+            "name": "Household",
             "taskIds": ["2","3"]
         }
     }
 };
 
 class DataManager {
+    /**
+     * @group Tasks
+     * @param {string} id 
+     * @returns {Object} task data
+     */
     static async fetchTaskById(id) {
-        const data = await mockData.tasks[id]
+        const data = await appData.tasks[id]
         return data;
     }
-    static async fetchCategoryById(id) {
-        const data = await mockData.categories[id];
-        return data;
-    }
+
+    /**
+     * @group Tasks
+     * @param {string} categoryId 
+     * @returns {Object} tasks in category
+     */
     static async fetchTasksInCategory(categoryId) {
         const categoryData = await this.fetchCategoryById(categoryId);
         let tasks = [];
@@ -66,6 +73,32 @@ class DataManager {
         }
         
         return tasks;
+    }
+
+    /**
+     * @group Categories
+     * @param {string} id 
+     * @returns 
+     */
+    static async fetchCategoryById(id) {
+        const data = await appData.categories[id];
+        return data;
+    }
+
+    /**
+     * @group Categories
+     * @returns {Array}
+     */
+    static fetchCategoryNames = async () => {
+        let categoryNames = [];
+        const iterateTasks = async () => {
+            for (const task of Object.values(appData.categories)) {
+                categoryNames.push(task.name);
+            }
+            return categoryNames;
+        }
+        const allNames = await iterateTasks();
+        return allNames;
     }
 }
 
