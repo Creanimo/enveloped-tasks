@@ -8,8 +8,6 @@ const appData = {
             "description": "Description for Task 1",
             "completed": false,
             "pinned": false,
-            "category": "1",
-            "tags": ["urgent"],
             "dueDate": "2024-08-10T00:00:00Z"
         },
         "2": {
@@ -18,8 +16,6 @@ const appData = {
             "description": "Description for Task 2",
             "completed": false,
             "pinned": true,
-            "category": "2",
-            "tags": ["important"],
             "dueDate": "2024-08-15T00:00:00Z"
         },
         "3": {
@@ -28,19 +24,23 @@ const appData = {
             "description": "Description for Task 2",
             "completed": false,
             "pinned": true,
-            "category": "2",
-            "tags": ["important"],
             "dueDate": "2024-08-15T00:00:00Z"
         }
     },
     "categories": {
         "1": {
             "name": "Work",
-            "taskIds": ["1"]
+            "taskIds": ["1"],
         },
         "2": {
             "name": "Household",
-            "taskIds": ["2","3"]
+            "taskIds": ["2","3"],
+        }
+    },
+    "tags": {
+        "1": {
+            "name": "meeting",
+            "taskIds": ["2"],
         }
     }
 };
@@ -91,13 +91,29 @@ class DataManager {
      */
     static fetchCategoryNames = async () => {
         let categoryNames = [];
-        const iterateTasks = async () => {
+        const iterateCategories= async () => {
             for (const task of Object.values(appData.categories)) {
                 categoryNames.push(task.name);
             }
             return categoryNames;
         }
-        const allNames = await iterateTasks();
+        const allNames = await iterateCategories();
+        return allNames;
+    }
+
+    /**
+     * @group Tags
+     * @returns {Array}
+     */
+    static fetchTagNames = async () => {
+        let tagNames = [];
+        const iterateTags = async () => {
+            for (const task of Object.values(appData.tags)) {
+                tagNames.push(task.name);
+            }
+            return tagNames;
+        }
+        const allNames = await iterateTags();
         return allNames;
     }
 }

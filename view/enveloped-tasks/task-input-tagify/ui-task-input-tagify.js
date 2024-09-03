@@ -7,7 +7,7 @@ class UiTaskInputTagify extends UiInput {
         const templatePath = "view/enveloped-tasks/task-input-tagify/ui-task-input-tagify.html";
         this.setTemplatePath(templatePath);
         fetchCategories().then(data => this.whitelistCategories = data)
-        this.whitelistTags = fetchTags();
+        fetchTags().then(data => this.whitelistTags = data)
         this.tagify = {};
     }
 

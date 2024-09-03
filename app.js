@@ -13,11 +13,8 @@ const categoryController = new CategoryController;
 const brainDumpCategoryList = new UiSortableList("braindDump","Brain Dump", [])
 // const TextFieldToTestThings = new UiTextField("asd", "My super cool textfield", "");
 
-const fetchCategoryNamesFromAppData = async () => {
-    const categoryNames = await DataManager.fetchCategoryNames()
-    return categoryNames
-}
-const taskInputField = new UiTaskInputTagify("dsxjzhgbf", "Add your task:", "", "addTask", () => {}, () => {}, fetchCategoryNamesFromAppData, () => { return ["urgent", "difficult", "easy"]});
+
+const taskInputField = new UiTaskInputTagify("dsxjzhgbf", "Add your task:", "", "addTask", () => {}, () => {}, DataManager.fetchCategoryNames, DataManager.fetchTagNames);
 
 // filling UI components with data
 const buildBraindDumpList = async () => {
